@@ -1,0 +1,79 @@
+<html>
+    <script type="text/javascript">
+    
+    function init() {
+        canvas = document.getElementById('canvasimg');
+        ctx = canvas.getContext("2d");
+        w = canvas.width;
+        h = canvas.height;
+        canvas.addEventListener("click", function (e) {
+            drawTriangle(1, e)
+        }, false);
+        
+        
+        
+    }
+
+    function clearAll(){
+        ctx.clearRect(0, 0, w, h);
+    }
+    
+    function color() {
+        var idx = getRandomInt()
+        switch (idx) {
+            case 1:
+                x = "green";
+                break;
+            case 2:
+                x = "blue";
+                break;
+            case 3:
+                x = "red";
+                break;
+            case 4:
+                x = "yellow";
+                break;
+            case 5:
+                x = "orange";
+                break;
+            case 6:
+                x = "black";
+                break;
+            default:
+                x = "pink";
+                break;
+        }
+        return x
+    
+    }
+
+    function getRandomInt() {
+        min = Math.ceil(1);
+        max = Math.floor(7)
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    
+    
+    function drawTriangle(scale, e) {
+
+        var centerx = e.clientX-135;
+        var centery = e.clientY;
+        console.log(centerx, centery)
+        var scalar = scale*50
+        ctx.fillStyle = color(); 
+        ctx.beginPath();
+        ctx.moveTo(centerx, centery+scalar);
+        ctx.lineTo(centerx+scalar, centery-scalar);
+        ctx.lineTo(centerx-scalar, centery-scalar);
+        ctx.fill();
+    }
+    
+    
+    </script>
+    <body onload="init()">
+        <canvas id="canvasimg" width="400" height="400" style="position:absolute;top:10%;left:10%;border:2px solid;"></canvas>
+        <div style="padding-left: 9%;">
+            <button onclick="clearAll()">Clear</button>
+        </div>
+    </body>
+    </html>
